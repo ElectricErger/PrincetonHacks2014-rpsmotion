@@ -2,51 +2,40 @@
 //computer. It also implements a timer and a counter.
 //This is the main loop of the program
 
-//function playGame(int level, boolean hasLeap){
+function playGame(int level, boolean hasLeap){
     var count = 0;
-    var wins = 0;
-    var losses = 0;
-    var ties = 0;
-    var playing=true;
-
-
-    //Get level directly from the webpage
-    //Get hasLeap directlyl from the webpage
+    var score = 0;
+    var playing = true;
     while(playing){
 
         //Calling the get methods --> Start other method --> That method starts a count down --> Returns a snap shot
 
         //Get input
     if (hasLeap) //if you have one we'll take it from the input
-        int human = input.leap;
+        int human = input.leap();
     else //if you don't have a leap then we'll just use the keyboard
-        int human = input.keyboard;
+        int human = input.keyboard();
 
     var computer=response(level, human); //Input: 1|2 --> Easy/Hard. 1|2|3 --> Rock|Paper|Sizzors
                                                             //Output: 1|2|3 --> Rock|Paper|Sizzors
 //See Appendix A
-    var result = HumanWin(human, computer); //Returns an int that declares that the player has won (+) or lost (-1)
-    if (result < 0)
-        losses++;
-    if (result > 0)
-        wins++;
-    if (result ==0)
-        ties++;
+    score = score + HumanWin(human, computer); //Returns an int that declares that the player has won (+) or lost (-1)
 
-        //playing = input.playAgain(); //Tests for the gester to play again
+
+    //playing = input.playAgain(); //Tests for the gester to play again
     }
-//}
+}
 //See Appendix B
 function HumanWin(human, computer){
-    if(human==computer)
+    if(human == computer)
         return 0;
-    if(human==1 && computer==3)
+    if(human == 1 && computer == 3)
         return 1;
-    if(human==3 && computer==1)
+    if(human == 3 && computer == 1)
         return -1;
-    if(human>computer)
+    if(human > computer)
         return 1;
-    if(computer>human)
+    if(computer > human)
         return -1;
 }
 
