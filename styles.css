@@ -64,6 +64,10 @@ body {
     font-style: italic;
 }
 
+#score {
+    font-family:"Serif";
+    font-size:100px;
+}
 #content {
 	font-family:"Arial";
 	background-color:#85F596;

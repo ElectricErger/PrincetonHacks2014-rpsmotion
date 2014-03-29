@@ -1,16 +1,16 @@
 img{
-	max-width:100%;
-	height:auto;
+    max-width:100%;
+    height:auto;
 }
 
 html, body {
-	margin:0; padding:0;
-	height:100%;
+    margin:0; padding:0;
+    height:100%;
 }
  
 body {
-	background-color:#85F596;
-	font-family:Georgia, Times, serifs;
+    background-color:#85F596;
+    font-family:Georgia, Times, serifs;
 }
 
 /* Regular */
@@ -63,32 +63,39 @@ body {
     font-weight: normal;
     font-style: italic;
 }
-
+@font-face {
+    font-family: 'Akashi';
+    src:url('type/Akashi.ttf');
+}
+#score {
+    font-family:"Akashi";
+    font-size:50px;
+}
 #content {
-	font-family:"Arial";
-	background-color:#85F596;
-	position:absolute; left:50%; top:50%;
-	overflow:auto; height:72px; width:20%;
-	padding:0px; margin-left:-10%; margin-top:-36px;
+    font-family:"Arial";
+    background-color:#85F596;
+    position:absolute; left:50%; top:50%;
+    overflow:auto; height:72px; width:20%;
+    padding:0px; margin-left:-10%; margin-top:-36px;
 }
 
 #title {
-	font-family:"League Gothic";
-	font-size:105px;
-	color:#FFFFFF;
-	background-color:#AF81C9;
-	height:150px; width:100%;
-	overflow:auto;
-	//border:6px ridge #F89A7E;
+    font-family:"League Gothic";
+    font-size:105px;
+    color:#FFFFFF;
+    background-color:#AF81C9;
+    height:150px; width:100%;
+    overflow:auto;
+    //border:6px ridge #F89A7E;
 }
 
 #container {
-	position:relative;
+    position:relative;
 }
 
 #credits {
-	position:fixed;
-	bottom:0;
-	width:100%;
-	text-align:right;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    text-align:right;
 }
