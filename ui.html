@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rock Paper Scissors!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Leapstrap -->
+		<link href="css/leapstrap.css" rel="stylesheet" media="screen">
+		<link href="css/styles.css" media="all" rel="stylesheet" type="text/css">
+		<!-- jQuery (necessary for Leapstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<!-- Leap (http://js.leapmotion.com/) -->
+		<script src="node_modules/leapjs/leap.js"></script>
+		<!-- Leapstrap -->
+		<script src="js/leapstrap.js"></script>
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+		<script src="rpsMid.js"></script>
+		<script src="freeze.js"></script>
+		<script>
+			function switch_pages(con){
+				if(con == "true"){
+					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, true)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<<button class=\"btn btn-primary btn-lg leap-interactive\ onclick=\"playGame(2, true)\">Hard</button><center>";
+				} else{
+					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, false)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\ onclick=\"playGame(2, false)\">Hard</button></center>";
+				}
+			}
+
+			function leapExists(){
+				document.getElementById("content").innerHTML = "<center>Do you have a leap motion?</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages(true)\">Yes!</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages(false)\">Nope</button><center>";
+				document.getElementById("content").style.fontFamily="League Gothic";
+				document.getElementById("content").style.fontSize="50px";
+				document.getElementById("content").style.top="41.5%";
+				document.getElementById("content").style.height = "60%";
+				document.getElementById("content").style.width = "33%"
+				document.getElementById("content").style.marginLeft="-16.5%"
+			}
+			function result(n){
+				document.getElementById("content").style.height = "60%";
+				document.getElementById("content").style.top = "29%";
+				if(n == 1){
+					document.getElementById("content").innerHTML = "<center><img src=\"img/paper.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
+				} else if(n == 2){
+					document.getElementById("content").innerHTML = "<center><img src=\"img/scissors.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
+				} else{
+					document.getElementById("content").innerHTML = "<center><img src=\"img/rock.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
+				}
+			}
+			function fxfunction(n){
+				document.getElementById("content").style.height = "60%";
+				document.getElementById("content").style.top = "40%";
+				if(n == 1){
+					document.getElementById("content").innerHTML = "<center><img src=\"img/1.png\"></center>"
+				} else if(n == 2){
+					document.getElementById("content").innerHTML = "<center><img src=\"img/2.png\"></center>"
+				} else{
+					document.getElementById("content").innerHTML = "<center><img src=\"img/3.png\"></center>"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+    		<span id="credits">Built by the allmighty Kelley Zhao</span>
+    	</div>
+		<div id="title"><center>RPS&nbsp&nbspM o t i o n<center></div>
+		<div id="score" align="right">Score: 0</div>
+		<div id="content">
+			<center><button class="btn btn-primary btn-lg btn-block leap-interactive" onclick="fxfunction(1)">Play!</button><center>
+		</div>
+		<script>LeapManager.init({interactiveSelector:"a",maxCursors:1});</script>
+	</body>
+</html>
