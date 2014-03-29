@@ -94,6 +94,7 @@ body {
 }
 
 #credits {
+    font-family:"Akashi";
     position:fixed;
     bottom:0;
     width:100%;

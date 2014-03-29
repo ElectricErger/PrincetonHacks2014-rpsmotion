@@ -14,9 +14,9 @@
 		<script src="js/leapstrap.js"></script>
 		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
 		<script src="rpsMid.js"></script>
-		<script src="freeze.js"></script>
 		<script>
 			function switch_pages(con){
+				CountDown()
 				if(con == "true"){
 					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, true)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<<button class=\"btn btn-primary btn-lg leap-interactive\ onclick=\"playGame(2, true)\">Hard</button><center>";
 				} else{
@@ -44,7 +44,7 @@
 					document.getElementById("content").innerHTML = "<center><img src=\"img/rock.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
 				}
 			}
-			function fxfunction(n){
+			function fxFunction(n){
 				document.getElementById("content").style.height = "60%";
 				document.getElementById("content").style.top = "40%";
 				if(n == 1){
@@ -59,12 +59,12 @@
 	</head>
 	<body>
 		<div id="container">
-    		<span id="credits">Built by the allmighty Kelley Zhao</span>
+    		<span id="credits">Built by Kelley, Max, Maurice, Robert</span>
     	</div>
 		<div id="title"><center>RPS&nbsp&nbspM o t i o n<center></div>
 		<div id="score" align="right">Score: 0</div>
 		<div id="content">
-			<center><button class="btn btn-primary btn-lg btn-block leap-interactive" onclick="fxfunction(1)">Play!</button><center>
+			<center><button class="btn btn-primary btn-lg btn-block leap-interactive" onclick="leapExists()">Play!</button><center>
 		</div>
 		<script>LeapManager.init({interactiveSelector:"a",maxCursors:1});</script>
 	</body>
