@@ -1,0 +1,27 @@
+
+#content {
+	background-color:#85F596;
+	position:absolute; left:50%; top:50%;
+	overflow:auto; height:72px; width:33%;
+	padding:0px; margin-left:-16.5%; margin-top:-36px
+}
+
+#title {
+	font-size:97px;
+	color:#FFFFFF;
+	background-color:#AF81C9;
+	height:150px; width:100%;
+	overflow:auto;
+	border:6px ridge #F89A7E;
+}
+
+#container {
+	position:relative;
+}
+
+#credits {
+	position:fixed;
+	bottom:0;
+	width:100%;
+	text-align:right;
+}
