@@ -13,14 +13,13 @@
 		<!-- Leapstrap -->
 		<script src="js/leapstrap.js"></script>
 		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
-		<script src="rpsMid.js"></script>
+		<script type="type/javascript" src="js/rpsMid.js"></script>
 		<script>
 			function switch_pages(con){
-				CountDown()
-				if(con == "true"){
-					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, true)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<<button class=\"btn btn-primary btn-lg leap-interactive\ onclick=\"playGame(2, true)\">Hard</button><center>";
+				if(con){
+					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, true)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(2, true)\">Hard</button></center>";
 				} else{
-					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, false)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\ onclick=\"playGame(2, false)\">Hard</button></center>";
+					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, false)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(2, false)\">Hard</button></center>";
 				}
 			}
 
