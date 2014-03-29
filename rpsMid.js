@@ -2,19 +2,20 @@
 //computer. It also implements a timer and a counter.
 //This is the main loop of the program
 
-function playGame(int level, boolean hasLeap){
+function playGame(level, hasLeap){
     var count = 0;
     var score = 0;
     var playing = true;
+    var human;
     while(playing){
 
         //Calling the get methods --> Start other method --> That method starts a count down --> Returns a snap shot
 
         //Get input
-    if (hasLeap) //if you have one we'll take it from the input
-        int human = input.leap();
+    if (hasLeap == "true") //if you have one we'll take it from the input
+        human = input.leap();
     else //if you don't have a leap then we'll just use the keyboard
-        int human = input.keyboard();
+        human = input.keyboard();
 
     var computer=response(level, human); //Input: 1|2 --> Easy/Hard. 1|2|3 --> Rock|Paper|Sizzors
                                                             //Output: 1|2|3 --> Rock|Paper|Sizzors
