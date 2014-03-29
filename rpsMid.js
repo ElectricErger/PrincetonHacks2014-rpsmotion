@@ -13,7 +13,6 @@ function playGame(level, hasLeap){
 
         //Get input
     human = freeze(hasLeap);
-
     if(human == 5) return;
     while(!(human==4||human==5)){
      //document.addEventListener('keydown', function(event));
@@ -88,11 +87,12 @@ function CountDown(){
 //Takes a freeze frame of the sensor's view  after a 
 //three second countdown
 function freeze(isLeap){
-	var controller = new Leap.controller();
+	//var controller = new Leap.controller(); //Causes crash
 	var input = 0;
 	CountDown();
 	if(isLeap){/*captureFunction*/;}
 	else{input = keyIn();}
+    console.log(input);
 	return input;
 }
 
