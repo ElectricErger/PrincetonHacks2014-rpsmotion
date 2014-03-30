@@ -287,7 +287,7 @@ function freeze(isLeap){
 
 //Implements the keyboard backup
 function keyIn(){
-	//document.addEventListener('keydown', function(event));
+	document.addEventListener('keydown', function(event));
 	switch(event.keyCode){
 		case 49: return 1;
 		case 50: return 2;
