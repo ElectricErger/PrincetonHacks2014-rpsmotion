@@ -10,7 +10,7 @@ function coolFunction(){
   var controllerOptions = {enableGestures: true};
   Leap.loop(controllerOptions, function(frame) {
     if (paused) {
-      return result; // Skip this update
+      return; // Skip this update
     }
 
     // Store frame for motion functions
@@ -34,24 +34,18 @@ function coolFunction(){
     }
     count++;
 
+<<<<<<< HEAD
     if (count == 60){
       togglePause();
+=======
+    if (count == 55){
+      //alert(result);
+      paused = !paused;
+>>>>>>> 4ca087851d8e3cb9142b0726ae88788640110523
     }
     alert("IGOHSOGIE");
 
 
   })
-
-  function vectorToString(vector, digits) {
-    if (typeof digits === "undefined") {
-      digits = 1;
-    }
-    return "(" + vector[0].toFixed(digits) + ", "
-               + vector[1].toFixed(digits) + ", "
-               + vector[2].toFixed(digits) + ")";
-  }
-
-  function togglePause() {
-    paused = !paused;
-  }
+  return result;
 }
