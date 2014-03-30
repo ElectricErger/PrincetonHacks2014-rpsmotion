@@ -135,6 +135,23 @@ function response(lvl, userMove){
         }
         return respond;
     }
+
+    if (lvl == 3){
+        var mysql = require('mysql');
+        var db = mysql.createConnection({
+            host : 'localhost',
+            user : 'user',
+            password : 'password'
+        });
+        db.connect();
+
+        var events = new Array();
+        var numRocks;
+        var numPaper;
+        var numSiss;
+
+
+    }
 }
 
 //Displays graphics of the numbers 3,2,1 0
