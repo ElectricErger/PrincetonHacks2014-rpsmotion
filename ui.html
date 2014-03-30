@@ -12,14 +12,16 @@
 		<script src="node_modules/leapjs/leap.js"></script>
 		<!-- Leapstrap -->
 		<script src="js/leapstrap.js"></script>
+		<script src="http://js.leapmotion.com/0.2.0/leap.min.js"></script>
 		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
-		<script type="type/javascript" src="js/rpsMid.js"></script>
+		<script src="js/leapdata.js"></script>
+		<script src="js/rpsMid.js"></script>
 		<script>
 			function switch_pages(con){
 				if(con){
-					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, true)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(2, true)\">Hard</button></center>";
+					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"CountDown(1,true)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"CountDown(2, true)\">Hard</button></center>";
 				} else{
-					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(1, false)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"playGame(2, false)\">Hard</button></center>";
+					document.getElementById("content").innerHTML = "<center>Choose your difficulty!</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"CountDown(1, false)\">Easy</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"CountDown(2, false)\">Hard</button></center>";
 				}
 			}
 
@@ -60,7 +62,7 @@
 		<div id="container">
     		<span id="credits">Built by Kelley, Max, Maurice, Robert</span>
     	</div>
-		<div id="title"><center>RPS&nbsp&nbspM o t i o n<center></div>
+		<div id="title"><center>RPS&nbsp&nbspMotion<center></div>
 		<div id="score" align="right">Score: 0</div>
 		<div id="content">
 			<center><button class="btn btn-primary btn-lg btn-block leap-interactive" onclick="leapExists()">Play!</button><center>

@@ -3,34 +3,39 @@
 //This is the main loop of the program
 
 function playGame(level, hasLeap){
-    alert("Butt");
     var count = 0;
     var score = 0;
     var playing = true;
     var human;
-    while(playing){
-
+    //while(playing){
         //Calling the get methods --> Start other method --> That method starts a count down --> Returns a snap shot
 
         //Get input
     human = freeze(hasLeap);
-    if(human == 5) return;
+    alert(human);
+    /*if(human == 5) return;
     while(!(human==4||human==5)){
+        alert("HI");
      //document.addEventListener('keydown', function(event));
      if(human == 5){return;}
-     if(human ==4){break;}
-    }
+     if(human == 4){break;}
+    }*/
 
-    var computer=response(level, human); //Input: 1|2 --> Easy/Hard. 1|2|3 --> Rock|Paper|Sizzors
-                                                            //Output: 1|2|3 --> Rock|Paper|Sizzors
-//See Appendix A
-    score = score + HumanWin(human, computer); //Returns an int that declares that the player has won (+) or lost (-1)
-
+    var computer=response(level, human); 
+    score = score + HumanWin(human, computer);
+    updateScore(score);
 
     //playing = input.playAgain(); //Tests for the gester to play again
-    }
+    //}
 }
 //See Appendix B
+
+function updateScore(score){
+    var scorestring = "Score: "        
+    scorestring += score  
+    document.getElementById("score").innerHTML = scorestring
+}
+
 function HumanWin(human, computer){
     if(human == computer)
         return 0;
@@ -78,11 +83,11 @@ function response(lvl, userMove){
 }
 
 //Displays graphics of the numbers 3,2,1 0
-function CountDown(){
-    window.setTimeout(function(){fxFunction(3)}, 1000);
-    window.setTimeout(function(){fxFunction(2)}, 2000);
-    window.setTimeout(function(){fxFunction(1)}, 3000);
-	window.setTimeout(null,4000);
+function CountDown(level, hasLeap){
+    fxFunction(3);
+    window.setTimeout(function(){fxFunction(2)}, 1000);
+    window.setTimeout(function(){fxFunction(1)}, 2000);
+	window.setTimeout(function(){playGame(level, hasLeap)}, 3000);
 }
 
 //Takes a freeze frame of the sensor's view  after a 
@@ -90,12 +95,62 @@ function CountDown(){
 function freeze(isLeap){
 	//var controller = new Leap.controller(); //Causes crash
 	var input = 0;
-	CountDown();
-	if(isLeap){/*captureFunction*/;}
-	else{input = keyIn();}\
+	if(isLeap){
+          var previousFrame = null;
+          var paused = false;
+          var pauseOnGesture = false;
+          var count = 0;
+          var result = -1;
+
+          // Setup Leap loop with frame callback function
+          var controllerOptions = {enableGestures: true};
+          Leap.loop(controllerOptions, function(frame) {
+            if (paused) {
+              input = result; // Skip this update
+            }
+
+            // Store frame for motion functions
+            previousFrame = frame;
+
+            if (frame.hands.length == 0){
+              //no response
+              result = -1;
+            }
+            else if(frame.fingers.length == 0){
+              // rock
+              result = 1;
+            }
+            else if(frame.fingers.length == 1 || frame.fingers.length == 2){
+              //scissor
+              result = 2;
+            }
+            else if(frame.fingers.length == 5){
+              //paper
+              result = 3;
+            }
+            count++;
+
+            if (count == 60){
+              togglePause(paused);
+            }
+        }
+    } else{
+        input = keyIn();
+    }
 	return input;
 }
 
+function vectorToString(vector, digits) {
+            if (typeof digits === "undefined") {
+              digits = 1;
+            }
+            return "(" + vector[0].toFixed(digits) + ", "
+                       + vector[1].toFixed(digits) + ", "
+                       + vector[2].toFixed(digits) + ")";
+          }
+function togglePause(paused) {
+            paused = !paused;
+}
 //Implements the keyboard backup
 function keyIn(){
 	//document.addEventListener('keydown', function(event));
