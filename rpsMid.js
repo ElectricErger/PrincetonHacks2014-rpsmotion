@@ -3,7 +3,6 @@
 //This is the main loop of the program
 
 function playGame(level, hasLeap){
-    alert("Butt");
     var count = 0;
     var score = 0;
     var playing = true;
@@ -14,11 +13,14 @@ function playGame(level, hasLeap){
 
         //Get input
     human = freeze(hasLeap);
-    if(human == 5) return;
+    if(human == 5)
+        return;
     while(!(human==4||human==5)){
      //document.addEventListener('keydown', function(event));
-     if(human == 5){return;}
-     if(human ==4){break;}
+     if(human == 5)
+        return;
+     if(human ==4)
+        break;
     }
 
     var computer=response(level, human); //Input: 1|2 --> Easy/Hard. 1|2|3 --> Rock|Paper|Sizzors
@@ -91,8 +93,10 @@ function freeze(isLeap){
 	//var controller = new Leap.controller(); //Causes crash
 	var input = 0;
 	CountDown();
-	if(isLeap){/*captureFunction*/;}
-	else{input = keyIn();}\
+	if(isLeap){
+        /*captureFunction*/}
+	else
+        input = keyIn();
 	return input;
 }
 
