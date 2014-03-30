@@ -111,20 +111,37 @@ function updateScore(score){
 }
 
 function HumanWin(human, computer){
+    //All sounds from SoundBible.com under attribution licence.
+    var pain = new Audio("Pain.wav");
+    var applause = new Audio("Applause.wav");
+    var tBone = new Audio("Trombone.wav");
+    var fireworks = new Audio("Fireworks.wav");
     if(human == computer){
         return 0;
     } else if(human == 3 && computer == 1){
-        return 1;
+        pain.play();
+        pain.currentTime=0;
+        return -1;
     } else if(human == 1 && computer == 3){
-        return -1;
-    } else if(human == 3 && computer == 2){
-        return -1
-    } else if(human == 1 && computer == 2){
+        applause.play();
+        applause.currentTime=0;
         return 1;
-    } else if(human == 2 && computer == 1){
-        return -1;
-    } else if(human == 2 && computer == 3){
+    } else if(human == 3 && computer == 2){
+        applause.play();
+        applause.currentTime=0;
         return 1
+    } else if(human == 1 && computer == 2){
+        pain.play();
+        pain.currentTime=0;
+        return -1;
+    } else if(human == 2 && computer == 1){
+        applause.play();
+        applause.currentTime=0;
+        return 1;
+    } else if(human == 2 && computer == 3){
+        pain.play();
+        pain.currentTime=0;
+        return -1
     }
 }
 
