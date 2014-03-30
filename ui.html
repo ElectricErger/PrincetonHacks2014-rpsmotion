@@ -14,7 +14,6 @@
 		<script src="js/leapstrap.js"></script>
 		<script src="http://js.leapmotion.com/0.2.0/leap.min.js"></script>
 		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all">
-		<script src="js/leapdata.js"></script>
 		<script src="js/rpsMid.js"></script>
 		<script>
 			function switch_pages(con){ // Choose difficulty
@@ -25,6 +24,15 @@
 				}
 			}
 
+			function switch_pages2(){
+				document.getElementById("content").style.fontFamily = "Arial";
+				document.getElementById("content").style.top = "50%";
+				document.getElementById("content").style.height = "72px";
+				document.getElementById("content").style.width = "20%";
+				document.getElementById("content").style.marginLeft = "-10%";
+				document.getElementById("content").style.marginTop = "-36px";
+				document.getElementById("content").innerHTML = "<center><button class=\"btn btn-primary btn-lg btn-block leap-interactive\" onclick=\"leapExists()\">Play!</button><center>"
+			}
 			function leapExists(){
 				document.getElementById("content").innerHTML = "<center>Do you have a leap motion?</center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages(true)\">Yes!</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages(false)\">Nope</button><center>";
 				document.getElementById("content").style.fontFamily="League Gothic";
@@ -55,7 +63,7 @@
 		<div id="container">
     		<span id="credits">Built by Kelley, Max, Maurice, Robert</span>
     	</div>
-		<div id="title"><center>RPS&nbsp&nbspMotion<center></div>
+		<div id="title" ><center>RPS&nbsp&nbspMotion<center></div>
 		<div id="score" align="right">Score: 0</div>
 		<div id="content">
 			<center><button class="btn btn-primary btn-lg btn-block leap-interactive" onclick="leapExists()">Play!</button><center>
