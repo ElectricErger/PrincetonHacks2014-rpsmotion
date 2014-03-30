@@ -6,6 +6,9 @@ var paused = true;
 var pauseOnGesture = false;
 var count = 0;
 var result = -1;
+var counter1 = 0;
+var counter2 = 0;
+var counter3 = 0;
 
 // Setup Leap loop with frame callback function
 var controllerOptions = {enableGestures: true};
@@ -24,19 +27,28 @@ Leap.loop(controllerOptions, function(frame) {
   else if(frame.fingers.length == 0){
     // rock
     result = 1;
+    counter1++;
   }
   else if(frame.fingers.length == 1 || frame.fingers.length == 2){
     //scissor
     result = 2;
+    counter2++;
   }
   else if(frame.fingers.length == 5){
     //paper
     result = 3;
+    counter3++;
   }
   count++;
 
-  if (count == 55){
-    alert(result);
+  if (count == 20){
+    if(Math.max(counter1, counter2, counter3) == counter3){
+        result = 3;
+    } else if (Math.max(counter1, counter2, counter3) == counter2){
+        result = 2;
+    } else if (Math.max(counter1, counter2, counter3) == counter1){
+        result = 1;
+    }
     paused = !paused;
   }
 })
@@ -54,27 +66,27 @@ function playGame(level, hasLeap){
     updateScore(score);
     if(computer == 1){
         if(winloss == 1){
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/rock.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You win!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/rock.png\" width=\"300px\" height=\"300px\"></center><center><button type=\"button\" class=\"btn btn-success leap-interactive\" onclick = \"switch_pages2()\">You win!</button></center>";
         } else if(winloss == -1){
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/rock.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You lose!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/rock.png\" width=\"300px\" height=\"300px\"></center><center><button type=\"button\" class=\"btn btn-danger leap-interactive\" onclick = \"switch_pages2()\">You Lose!</button></center>";
         } else{
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/rock.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/rock.png\" width=\"300px\" height=\"300px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
         }
     } else if(computer == 2){
          if(winloss == 1){
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/sissors.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You win!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/sissors.png\" width=\"300px\" height=\"300px\"></center><center><button type=\"button\" class=\"btn btn-success leap-interactive\" onclick = \"switch_pages2()\">You win!</button></center>";
         } else if(winloss == -1){
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/sissors.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You lose!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/sissors.png\" width=\"300px\" height=\"300px\"></center><center><button type=\"button\" class=\"btn btn-danger leap-interactive\" onclick = \"switch_pages2()\">You Lose!</button></center>";
         } else{
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/sissors.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/sissors.png\" width=\"300px\" height=\"300px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
         }
     } else{
          if(winloss == 1){
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/paper.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You win!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/paper.png\" width=\"300px\" height=\"300px\"></center><center><button type=\"button\" class=\"btn btn-success leap-interactive\" onclick = \"switch_pages2()\">You win!</button></center>";
         } else if(winloss == -1){
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/paper.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You lose!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/paper.png\" width=\"300px\" height=\"300px\"></center><center><button type=\"button\" class=\"btn btn-danger leap-interactive\" onclick = s\"witch_pages2()\">You Lose!</button></center>";
         } else{
-            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/paper.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
+            document.getElementById("content").innerHTML = "<center>HAL the robot does</center><center><img src=\"../repos/img/paper.png\" width=\"300px\" height=\"300px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
         }
     }
 }
@@ -140,11 +152,11 @@ function response(lvl, userMove){
 //Displays graphics of the numbers 3,2,1 0
 function CountDown(level, hasLeap){
     fxFunction(3);
-    window.setTimeout(function(){fxFunction(2)}, 1000);
-    window.setTimeout(function(){fxFunction(1)}, 2000);
-    window.setTimeout(function(){fxFunction(4)}, 3000);
-    window.setTimeout(function(){paused=false;}, 2800);
-	window.setTimeout(function(){playGame(level, hasLeap)}, 3800);
+    window.setTimeout(function(){fxFunction(2)}, 700);
+    window.setTimeout(function(){fxFunction(1)}, 1400);
+    window.setTimeout(function(){fxFunction(4)}, 2100);
+    window.setTimeout(function(){paused=false;}, 2500);
+	window.setTimeout(function(){playGame(level, hasLeap)}, 2800);
 }
 
 //Takes a freeze frame of the sensor's view  after a 
