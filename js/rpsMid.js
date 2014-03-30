@@ -1,32 +1,82 @@
 //This program determines whether the user has won, lost, or tied with the
 //computer. It also implements a timer and a counter.
 //This is the main loop of the program
+var previousFrame = null;
+var paused = true;
+var pauseOnGesture = false;
+var count = 0;
+var result = -1;
+
+// Setup Leap loop with frame callback function
+var controllerOptions = {enableGestures: true};
+Leap.loop(controllerOptions, function(frame) {
+  if (paused) {
+    return; // Skip this update
+  }
+
+   // Store frame for motion functions
+  previousFrame = frame;
+
+  if (frame.hands.length == 0){
+      //no response
+   result = -1;
+  }
+  else if(frame.fingers.length == 0){
+    // rock
+    result = 1;
+  }
+  else if(frame.fingers.length == 1 || frame.fingers.length == 2){
+    //scissor
+    result = 2;
+  }
+  else if(frame.fingers.length == 5){
+    //paper
+    result = 3;
+  }
+  count++;
+
+  if (count == 55){
+    alert(result);
+    paused = !paused;
+  }
+})
 
 function playGame(level, hasLeap){
+    document.getElementById("content").style.height = "63%";
+    document.getElementById("content").style.top = "29%";
     var count = 0;
     var score = 0;
     var playing = true;
-    var human;
-    //while(playing){
-        //Calling the get methods --> Start other method --> That method starts a count down --> Returns a snap shot
-
-        //Get input
-    human = freeze(hasLeap);
-    alert(human);
-    /*if(human == 5) return;
-    while(!(human==4||human==5)){
-        alert("HI");
-     //document.addEventListener('keydown', function(event));
-     if(human == 5){return;}
-     if(human == 4){break;}
-    }*/
-
-    var computer=response(level, human); 
-    score = score + HumanWin(human, computer);
+    human = result;
+    var computer = response(level, human)
+    var winloss = HumanWin(human, computer);
+    score = score + winloss;
     updateScore(score);
-
-    //playing = input.playAgain(); //Tests for the gester to play again
-    //}
+    if(computer == 1){
+        if(winloss == 1){
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/rock.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You win!</button></center>";
+        } else if(winloss == -1){
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/rock.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You lose!</button></center>";
+        } else{
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/rock.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
+        }
+    } else if(computer == 2){
+         if(winloss == 1){
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/sissors.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You win!</button></center>";
+        } else if(winloss == -1){
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/sissors.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You lose!</button></center>";
+        } else{
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/sissors.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
+        }
+    } else{
+         if(winloss == 1){
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/paper.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You win!</button></center>";
+        } else if(winloss == -1){
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/paper.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">You lose!</button></center>";
+        } else{
+            document.getElementById("content").innerHTML = "<center><img src=\"../repos/img/paper.png\" width=\"400px\" height=\"400px\"></center><center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">A draw!</button></center>";
+        }
+    }
 }
 //See Appendix B
 
@@ -37,16 +87,21 @@ function updateScore(score){
 }
 
 function HumanWin(human, computer){
-    if(human == computer)
+    if(human == computer){
         return 0;
-    if(human == 1 && computer == 3)
+    } else if(human == 3 && computer == 1){
         return 1;
-    if(human == 3 && computer == 1)
+    } else if(human == 1 && computer == 3){
         return -1;
-    if(human > computer)
+    } else if(human == 3 && computer == 2){
+        return -1
+    } else if(human == 1 && computer == 2){
         return 1;
-    if(computer > human)
+    } else if(human == 2 && computer == 1){
         return -1;
+    } else if(human == 2 && computer == 3){
+        return 1
+    }
 }
 
 //You pass in the "difficulty" Easy - 1, Hard - 2 and "userMove" Rock - 1, Paper - 2, Sizzors - 3
@@ -87,7 +142,9 @@ function CountDown(level, hasLeap){
     fxFunction(3);
     window.setTimeout(function(){fxFunction(2)}, 1000);
     window.setTimeout(function(){fxFunction(1)}, 2000);
-	window.setTimeout(function(){playGame(level, hasLeap)}, 3000);
+    window.setTimeout(function(){fxFunction(4)}, 3000);
+    window.setTimeout(function(){paused=false;}, 2800);
+	window.setTimeout(function(){playGame(level, hasLeap)}, 3800);
 }
 
 //Takes a freeze frame of the sensor's view  after a 
@@ -96,61 +153,13 @@ function freeze(isLeap){
 	//var controller = new Leap.controller(); //Causes crash
 	var input = 0;
 	if(isLeap){
-          var previousFrame = null;
-          var paused = false;
-          var pauseOnGesture = false;
-          var count = 0;
-          var result = -1;
-
-          // Setup Leap loop with frame callback function
-          var controllerOptions = {enableGestures: true};
-          Leap.loop(controllerOptions, function(frame) {
-            if (paused) {
-              input = result; // Skip this update
-            }
-
-            // Store frame for motion functions
-            previousFrame = frame;
-
-            if (frame.hands.length == 0){
-              //no response
-              result = -1;
-            }
-            else if(frame.fingers.length == 0){
-              // rock
-              result = 1;
-            }
-            else if(frame.fingers.length == 1 || frame.fingers.length == 2){
-              //scissor
-              result = 2;
-            }
-            else if(frame.fingers.length == 5){
-              //paper
-              result = 3;
-            }
-            count++;
-
-            if (count == 60){
-              togglePause(paused);
-            }
-        }
+        input = coolFunction();
     } else{
         input = keyIn();
     }
 	return input;
 }
 
-function vectorToString(vector, digits) {
-            if (typeof digits === "undefined") {
-              digits = 1;
-            }
-            return "(" + vector[0].toFixed(digits) + ", "
-                       + vector[1].toFixed(digits) + ", "
-                       + vector[2].toFixed(digits) + ")";
-          }
-function togglePause(paused) {
-            paused = !paused;
-}
 //Implements the keyboard backup
 function keyIn(){
 	//document.addEventListener('keydown', function(event));
@@ -163,10 +172,6 @@ function keyIn(){
 		default: return -1;
     }
 }
-
-
-
-
 
 //Appendix A
 //For easy, just set output to be random

@@ -13,7 +13,7 @@
 		<!-- Leapstrap -->
 		<script src="js/leapstrap.js"></script>
 		<script src="http://js.leapmotion.com/0.2.0/leap.min.js"></script>
-		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all">
 		<script src="js/leapdata.js"></script>
 		<script src="js/rpsMid.js"></script>
 		<script>
@@ -34,17 +34,6 @@
 				document.getElementById("content").style.width = "33%"
 				document.getElementById("content").style.marginLeft="-16.5%"
 			}
-			function result(n){
-				document.getElementById("content").style.height = "60%";
-				document.getElementById("content").style.top = "29%";
-				if(n == 1){
-					document.getElementById("content").innerHTML = "<center><img src=\"img/paper.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
-				} else if(n == 2){
-					document.getElementById("content").innerHTML = "<center><img src=\"img/scissors.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
-				} else{
-					document.getElementById("content").innerHTML = "<center><img src=\"img/rock.png\" width=\"400px\" height=\"400px\" alt=\"Hi\"> <center><button class=\"btn btn-primary btn-lg leap-interactive\" onclick=\"switch_pages2()\">Easy</button>";
-				}
-			}
 			function fxFunction(n){
 				document.getElementById("content").style.height = "60%";
 				document.getElementById("content").style.top = "40%";
@@ -52,8 +41,14 @@
 					document.getElementById("content").innerHTML = "<center><img src=\"img/1.png\"></center>"
 				} else if(n == 2){
 					document.getElementById("content").innerHTML = "<center><img src=\"img/2.png\"></center>"
-				} else{
+				} else if(n == 3){
 					document.getElementById("content").innerHTML = "<center><img src=\"img/3.png\"></center>"
+				} else{
+					document.getElementById("content").style.top = "50%";
+					document.getElementById("content").style.height = "20%";
+					document.getElementById("content").style.fontFamily="League Gothic";
+					document.getElementById("content").style.fontSize="75px";
+					document.getElementById("content").innerHTML = "<center>SHOOT!</center>"
 				}
 			}
 		</script>
