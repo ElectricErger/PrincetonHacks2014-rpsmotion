@@ -35,19 +35,17 @@
 				document.getElementById("content").style.marginLeft="-16.5%"
 			}
 			function fxFunction(n){
-				document.getElementById("content").style.height = "60%";
-				document.getElementById("content").style.top = "40%";
+				document.getElementById("content").style.top = "50%";
+				document.getElementById("content").style.height = "20%";
+				document.getElementById("content").style.fontFamily="League Gothic";
+				document.getElementById("content").style.fontSize="75px";
 				if(n == 1){
-					document.getElementById("content").innerHTML = "<center><img src=\"img/1.png\"></center>"
+					document.getElementById("content").innerHTML = "<center>Scissors!</center>"
 				} else if(n == 2){
-					document.getElementById("content").innerHTML = "<center><img src=\"img/2.png\"></center>"
+					document.getElementById("content").innerHTML = "<center>Paper!</center>"
 				} else if(n == 3){
-					document.getElementById("content").innerHTML = "<center><img src=\"img/3.png\"></center>"
+					document.getElementById("content").innerHTML = "<center>Rock!</center>"
 				} else{
-					document.getElementById("content").style.top = "50%";
-					document.getElementById("content").style.height = "20%";
-					document.getElementById("content").style.fontFamily="League Gothic";
-					document.getElementById("content").style.fontSize="75px";
 					document.getElementById("content").innerHTML = "<center>SHOOT!</center>"
 				}
 			}
