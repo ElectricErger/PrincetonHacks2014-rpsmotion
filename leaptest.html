@@ -1,171 +1,48 @@
-<!DOCTYPE html>
-<!--
-/------------------------------------------------------------------------------\
-| Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               |
-| Leap Motion proprietary and confidential. Not for distribution.              |
-| Use subject to the terms of the Leap Motion SDK Agreement available at       |
-| https://developer.leapmotion.com/sdk_agreement, or another agreement         |
-| between Leap Motion and you, your company or other organization.             |
-\------------------------------------------------------------------------------/
--->
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Leap Motion JavaScript Sample</title>
 <script src="http://js.leapmotion.com/0.2.0/leap.min.js"></script>
 <script>
 
 function coolFunction(){
-var result = -1;
-
-// Store frame for motion functions
 var previousFrame = null;
 var paused = false;
-var pauseOnGesture = true;
+var pauseOnGesture = false;
+var count = 0;
+var result = -1;
 
 // Setup Leap loop with frame callback function
 var controllerOptions = {enableGestures: true};
-var count = 0;
-var fingerCount = 0;
-var fingerAverage = 0;
 
 Leap.loop(controllerOptions, function(frame) {
   if (paused) {
-    return; // Skip this update
+    return result; // Skip this update
   }
 
-<<<<<<< HEAD
-  // Frame motion factors
-  if (previousFrame && previousFrame.valid) {
-    var translation = frame.translation(previousFrame);
-    var rotationAxis = frame.rotationAxis(previousFrame);
-    var rotationAngle = frame.rotationAngle(previousFrame);
-    var scaleFactor = frame.scaleFactor(previousFrame);
+  // Store frame for motion functions
+  previousFrame = frame;
+
+  if (frame.hands.length == 0){
+    document.getElementById("game").innerHTML = "No hand detected";
+    result = -1;
   }
-
-  // Display Hand object data
-  if (frame.hands.length > 0) {
-    for (var i = 0; i < frame.hands.length; i++) {
-      var hand = frame.hands[i];
-
-      // Hand motion factors
-      if (previousFrame && previousFrame.valid) {
-        var translation = hand.translation(previousFrame);
-        var rotationAxis = hand.rotationAxis(previousFrame, 2);
-        var rotationAngle = hand.rotationAngle(previousFrame);
-        var scaleFactor = hand.scaleFactor(previousFrame);
-      }
-
-      // IDs of pointables (fingers and tools) associated with this hand
-      if (hand.pointables.length > 0) {
-        var fingerIds = [];
-        var toolIds = [];
-        for (var j = 0; j < hand.pointables.length; j++) {
-          var pointable = hand.pointables[j];
-          if (pointable.tool) {
-            toolIds.push(pointable.id);
-          }
-          else {
-            fingerIds.push(pointable.id);
-          }
-        }
-
-      }
-
-    }
+  else if(frame.fingers.length == 0){
+    document.getElementById("game").innerHTML = "Rock";
+    result = 1;
   }
-=======
-  // Display Hand object data
-  var handOutput = document.getElementById("handData");
-  var handString = "";
->>>>>>> ef7ffd083eae6f172fa62daa758ff61cec9da036
-
-  // Display Gesture object data
-  var gestureOutput = document.getElementById("gestureData");
-  var gestureString = "";
-  if (frame.gestures.length > 0) {
-    if (pauseOnGesture) {
-      togglePause();
-    }
-    for (var i = 0; i < frame.gestures.length; i++) {
-      var gesture = frame.gestures[i];
-<<<<<<< HEAD
-
-      switch (gesture.type) {
-        case "circle":
-          break;
-        case "swipe":
-=======
-      if(gesture.type == "swipe") {
->>>>>>> ef7ffd083eae6f172fa62daa758ff61cec9da036
-        	var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
-       	   //Classify as right-left or up-down
-       	   if(isHorizontal){
-              if(gesture.direction[0] > 0){
-                  swipeDirection = "right";
-              } else {
-                  swipeDirection = "left";
-              }
-       	   } else { //vertical
-              if(gesture.direction[1] > 0){
-                  swipeDirection = "up";
-              } else {
-                  swipeDirection = "down";
-              }                  
-          }
-<<<<<<< HEAD
-         document.getElementById("swipe").innerHTML = swipeDirection;
-
-
-          break;
-        case "screenTap":
-        case "keyTap":
-          break;
-        default:
-      }
-    }
+  else if(frame.fingers.length == 1 || frame.fingers.length == 2){
+    document.getElementById("game").innerHTML = "Scissor";
+    result = 2;
   }
+  else if(frame.fingers.length == 5){
+    document.getElementById("game").innerHTML = "Paper";
+    result = 3;
+  }
+  count++;
+  document.getElementById("count").innerHTML = count;
 
-  	previousFrame = frame;
-  	
- 
-  	if (frame.hands.length == 0){
-  		document.getElementById("game").innerHTML = "Draw!";
-  		result = -1;
-  	}
-  	else if (frame.fingers.length == 0){
-	  	document.getElementById("game").innerHTML = "Rock";
-	  	result = 1;
-  	}
-  	else if (frame.fingers.length == 2 || frame.fingers.length == 1){
- 	 	document.getElementById("game").innerHTML = "Scissors";
- 	 	result = 2;
- 	}
-	
-  	else if (frame.fingers.length == 5){
-=======
-
-          document.getElementById("swipe").innerHTML = swipeDirection;
-    }
+  if (count == 120){
+    togglePause();
   }
 
 
-  	if (frame.fingers.length == 2 || frame.fingers.length == 1){
- 	 	    document.getElementById("game").innerHTML = "Scissors";
- 	  } else if (frame.fingers.length == 0){
-	  	document.getElementById("game").innerHTML = "Rock";
-  	} else if (frame.fingers.length == 5){
->>>>>>> ef7ffd083eae6f172fa62daa758ff61cec9da036
-  		document.getElementById("game").innerHTML = "Paper";
-  		result = 3
-  	}
-
-<<<<<<< HEAD
-  	count++;
-  	if(count == 120){
-  		togglePause();
-  	}
- 	document.getElementById("count").innerHTML = count;
 })
 
 function vectorToString(vector, digits) {
@@ -193,30 +70,7 @@ function pauseForGestures() {
   } else {
     pauseOnGesture = false;
   }
-=======
-  	return;
- 	
 }
-
-}
->>>>>>> ef7ffd083eae6f172fa62daa758ff61cec9da036
-}
-
 }
 
 </script>
-
-</head>
-
-<body>
-<h1>Leap Motion JavaScript Sample</h1>
-<div id="main">
-  <button id="pause" onclick="coolFunction()">Pause</button>
-  <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
-  <div id="game"></div>
-  <div id="swipe"></div>
-  <div id="count"></div>
-</div>
-
-</body>
-</html>
