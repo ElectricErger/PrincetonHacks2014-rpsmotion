@@ -7,6 +7,10 @@ function playGame(level, hasLeap){
     var score = 0;
     var playing = true;
     var human;
+    var pain = new Audio("Pain.wav");
+    var applause = new Audio("Applause.wav");
+    var tBone = new Audio("Trombone.wav");
+    var fireworks = new Audio("Fireworks.wav");
     while(playing){
 
         //Calling the get methods --> Start other method --> That method starts a count down --> Returns a snap shot
@@ -15,7 +19,7 @@ function playGame(level, hasLeap){
     human = freeze(hasLeap);
     if(human == 5)
         return;
-    while(!(human==4||human==5)){
+    while(!(huma==4||human==5)){
      //document.addEventListener('keydown', function(event));
      if(human == 5)
         return;
@@ -36,14 +40,26 @@ function playGame(level, hasLeap){
 function HumanWin(human, computer){
     if(human == computer)
         return 0;
-    if(human == 1 && computer == 3)
+    if(human == 1 && computer == 3){
+        applause.play();
+        applause.currentTime = 0;
         return 1;
-    if(human == 3 && computer == 1)
+    }
+    if(human == 3 && computer == 1){
+        pain.play();
+        pain.currentTime = 0;
         return -1;
-    if(human > computer)
+    }
+    if(human > computer){
+        applause.play();
+        applause.currentTime = 0;
         return 1;
-    if(computer > human)
+    }
+    if(computer > human){
+        pain.play();
+        pain.currentTime = 0;
         return -1;
+    }
 }
 
 //You pass in the "difficulty" Easy - 1, Hard - 2 and "userMove" Rock - 1, Paper - 2, Sizzors - 3
