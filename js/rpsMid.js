@@ -9,6 +9,11 @@ var result = -1;
 var counter1 = 0;
 var counter2 = 0;
 var counter3 = 0;
+var p = 0;
+var events = new Array();
+var numRock=0;
+var numPaper=0;
+var numScissor=0;
 
 // Setup Leap loop with frame callback function
 var controllerOptions = {enableGestures: true};
@@ -147,6 +152,81 @@ function response(lvl, userMove){
         }
         return respond;
     }
+    //Machine guessing
+    if (lvl == 3){
+        var imm1; var imm2; var imm3; //Rock papers and scissors
+        var credit1=0; var credit2=0; var credit3=0; //Points - Filling any above conditions leads to a boost in points
+        var old=0; var repeat=false;
+        while(p>(p-10) || p>0){ //gets the last 10 values
+            if (events[p] == 1){
+                imm1++;
+                if(old==events[p] && repeat)
+                    credit1++;
+            }
+            if (events[p] == 2){
+                imm2++;
+                if(old==events[p] && repeat)
+                    credit2++;
+            }
+            if (events[p] == 3){
+                imm3++;
+                if(old==events[p] && repeat)
+                    credit3++;
+            }
+            if (old == events[p]) //Rule 3
+                repeat=true;
+            else
+                repeat=false;
+            old = events[p];
+            p--;
+        }
+        /*If a person:
+            Rule 1-has a ratio greater than 1.2 --> They favor it
+            Rule 2-has choosen this between 3-5 times recently --> They favor it
+            Rule 3-has a 3 consecutive streak --> they will not throw the same
+            Protocol 1--If your previous guess was wrong, they're switching up the game and will likely do the opposite of what you just did        
+        */
+        if (imm1>0 && imm2>0 && imm3>0){
+            var short1v2 = imm1/imm2; //short term preference
+            var short2v3 = imm2/imm3;
+            var short3v1 = imm3/imm1;
+
+            if (short3v1 <= .833 || short1v2 >= 1.2) //Rule 1
+                credit1++;
+            if (short1v2 <= .833 || short2v3 >= 1.2)
+                credit2++;
+            if (short2v3 <= .833 || short3v1 >= 1.2)
+                credit3++;
+
+            if(imm1 > 3 && imm1 < 5) //Rule 2
+                credit1++;
+            if(imm2 > 3 && imm2 < 5)
+                credit2++;
+            if(imm3 > 3 && imm3 < 5) 
+                credit3++;
+        }
+        //The credits act as a lottery
+        var lottery = Math.random();
+        var totalCredits = credit1 + credit2 + credit3;
+        lotteryNumber = Math.floor(lottery*totalCredits); //By this time it's a random 1-n number (good for guessing)
+
+        var lottery = new Array(); //Makes an ordered array full of the tickets
+        for (int i=0; i<totalCredits; i++){
+            if(credit1!=0){
+                lottery[i]=1;
+                credit1--;
+            }
+            if(credit2!=0){
+                lottery[i]=2;
+                credit2--;
+            }
+            if(credit3!=0){
+                lottery[i]=3;
+                credit3--;
+            }
+        }
+        return lottery[lotteryNumber];
+    }
 }
 
 //Displays graphics of the numbers 3,2,1 0
@@ -169,6 +249,14 @@ function freeze(isLeap){
     } else{
         input = keyIn();
     }
+    if (input == 1)
+        numRock++;
+    if (input == 2)
+        numPaper++;
+    if (input == 3)
+        numScissor++;
+    events[p]=input;
+    p++;
 	return input;
 }
 
