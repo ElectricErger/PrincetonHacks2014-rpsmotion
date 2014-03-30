@@ -249,18 +249,14 @@ function CountDown(level, hasLeap){
 //Takes a freeze frame of the sensor's view  after a 
 //three second countdown
 function freeze(isLeap){
-<<<<<<< HEAD
-=======
 	//var controller = new Leap.controller(); //Causes crash
->>>>>>> 9049da6269b23af3c6b5de5ffba1cc999b9adff8
 	var input = 0;
 	if(isLeap){
         input = coolFunction();
     } else{
         input = keyIn();
     }
-<<<<<<< HEAD
-=======
+
     if (input == 1)
         numRock++;
     if (input == 2)
@@ -269,7 +265,6 @@ function freeze(isLeap){
         numScissor++;
     events[p]=input;
     p++;
->>>>>>> 9049da6269b23af3c6b5de5ffba1cc999b9adff8
 	return input;
 }
 
