@@ -35,9 +35,9 @@ function coolFunction(){
     count++;
 
     if (count == 60){
-      alert("IGOHSOGIE");
       togglePause();
     }
+    alert("IGOHSOGIE");
 
 
   })
