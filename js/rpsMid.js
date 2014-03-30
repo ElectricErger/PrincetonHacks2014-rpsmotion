@@ -63,10 +63,34 @@ function playGame(level, hasLeap){
     document.getElementById("content").style.top = "29%";
     var count = 0;
     var score = 0;
+<<<<<<< HEAD
+=======
+    var playing = true;
+<<<<<<< HEAD
+    var human;
+    //while(playing){
+        //Calling the get methods --> Start other method --> That method starts a count down --> Returns a snap shot
+
+        //Get input
+    //human = freeze(hasLeap);
+    //alert(human);
+    /*if(human == 5) return;
+    while(!(human==4||human==5)){
+        alert("HI");
+     //document.addEventListener('keydown', function(event));
+     if(human == 5){return;}
+     if(human == 4){break;}
+    }*/
+
+    var computer=response(level, 5); // this is the computer's move
+    score = score + HumanWin(5, computer); // this calculates the score based on the computer's and the human's move
+=======
+>>>>>>> 3d9289d23687d73e04133db2f29a1d467b2d86ef
     human = result;
     var computer = response(level, human);
     var winloss = HumanWin(human, computer);
     score = score + winloss;
+>>>>>>> 4ca087851d8e3cb9142b0726ae88788640110523
     updateScore(score);
     var string = "(" + level + "," + hasLeap + ")";
     if(computer == 1){
@@ -160,11 +184,41 @@ function response(lvl, userMove){
 //Displays graphics of the numbers 3,2,1 0
 function CountDown(level, hasLeap){
     fxFunction(3);
+<<<<<<< HEAD
     window.setTimeout(function(){fxFunction(2)}, 800);
     window.setTimeout(function(){fxFunction(1)}, 1600);
     window.setTimeout(function(){fxFunction(4)}, 2400);
     window.setTimeout(function(){paused=false;}, 2400);
 	window.setTimeout(function(){playGame(level, hasLeap)}, 3200);
+=======
+    window.setTimeout(function(){fxFunction(2)}, 700);
+    window.setTimeout(function(){fxFunction(1)}, 1400);
+    window.setTimeout(function(){fxFunction(4)}, 2100);
+    window.setTimeout(function(){paused=false;}, 2500);
+	window.setTimeout(function(){playGame(level, hasLeap)}, 2800);
+}
+
+//Takes a freeze frame of the sensor's view  after a 
+//three second countdown
+function freeze(isLeap){
+<<<<<<< HEAD
+  if (isLeap){
+    input = coolFunction();
+  }
+  else{
+    input = keyIn();
+  }
+=======
+	//var controller = new Leap.controller(); //Causes crash
+	var input = 0;
+	if(isLeap){
+        input = coolFunction();
+    } else{
+        input = keyIn();
+    }
+>>>>>>> 4ca087851d8e3cb9142b0726ae88788640110523
+	return input;
+>>>>>>> 3d9289d23687d73e04133db2f29a1d467b2d86ef
 }
 
 //Implements the keyboard backup

@@ -34,10 +34,16 @@ function coolFunction(){
     }
     count++;
 
+<<<<<<< HEAD
+    if (count == 60){
+      togglePause();
+=======
     if (count == 55){
       //alert(result);
       paused = !paused;
+>>>>>>> 4ca087851d8e3cb9142b0726ae88788640110523
     }
+    alert("IGOHSOGIE");
 
 
   })
